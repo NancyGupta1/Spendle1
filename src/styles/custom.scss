@@ -1,0 +1,31 @@
+$primary: #4caf50;
+$success: #009688;
+$font-family-sans-serif: 'Poppins', sans-serif;
+@import 'bootstrap/scss/bootstrap';
+[data-theme='dark'] {
+  body {
+    background-color: #1a1a1a;
+    color: #eaeaea;
+  }
+
+  .card {
+    background-color: #2a2a2a;
+    color: white;
+  }
+
+  .navbar,
+  .btn-light {
+    background-color: #2a2a2a !important;
+    color: #fff !important;
+  }
+
+  .btn-outline-danger {
+    border-color: #e53e3e;
+    color: #e53e3e;
+  }
+
+  .list-group-item {
+    background-color: #333;
+    color: white;
+  }
+}

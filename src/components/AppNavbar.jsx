@@ -23,25 +23,25 @@ const AppNavbar = ({ onLoginClick, isLoggedIn, onLogout, userName }) => {
             </Nav>
           )}
 
-          <div className="d-flex gap-2 align-items-center ms-auto">
+          <div className="d-flex gap-3 align-items-center ms-auto">
             {isLoggedIn && userName && (
               <span className="nav-username d-none d-md-inline">👤 {userName}</span>
             )}
 
             <Button
               variant={theme === 'dark' ? 'outline-light' : 'outline-dark'}
-              size="sm"
+              size="md"
               onClick={toggleTheme}
             >
               {theme === 'dark' ? '☀️ Light' : '🌙 Dark'}
             </Button>
 
             {!isLoggedIn ? (
-              <Button variant="outline-primary" size="sm" onClick={onLoginClick}>
+              <Button variant="outline-primary" size="md" onClick={onLoginClick}>
                 Login
               </Button>
             ) : (
-              <Button variant="outline-danger" size="sm" onClick={onLogout}>
+              <Button variant="outline-danger" size="md" onClick={onLogout}>
                 Logout
               </Button>
             )}

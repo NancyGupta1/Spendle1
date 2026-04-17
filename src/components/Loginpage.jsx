@@ -46,7 +46,7 @@ const Loginpage = ({ onLogin }) => {
           <circle cx="200" cy="320" r="130" fill="rgba(124,92,252,0.07)"/>
 
           {/* bar chart */}
-          <g opacity="0.85">
+         <g opacity="0.85" transform="translate(0,-80)">
             <rect x="60"  y="380" width="28" height="80"  rx="5" fill="rgba(124,92,252,0.3)"  stroke="#7c5cfc" strokeWidth="0.8"/>
             <rect x="100" y="340" width="28" height="120" rx="5" fill="rgba(124,92,252,0.45)" stroke="#7c5cfc" strokeWidth="0.8"/>
             <rect x="140" y="300" width="28" height="160" rx="5" fill="#7c5cfc"               stroke="#a78bfa" strokeWidth="0.8"/>

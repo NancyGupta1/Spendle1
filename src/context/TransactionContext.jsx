@@ -1,29 +1,22 @@
 import { createContext, useReducer, useEffect } from 'react';
 
-const initialState = {
-  transactions: [],
-  budget: 0,
-};
+const initialState = { transactions: [], budget: 0 };
 
 export const TransactionContext = createContext(initialState);
 
 function TransactionReducer(state, action) {
   switch (action.type) {
-    case 'SET_TRANSACTIONS':
-      return { ...state, transactions: action.payload };
-    case 'ADD_ENTRY':
-      return { ...state, transactions: [action.payload, ...state.transactions] };
-    case 'REMOVE_ENTRY':
-      return { ...state, transactions: state.transactions.filter(tx => tx.id !== action.payload) };
-    case 'SET_BUDGET':
-      return { ...state, budget: action.payload };
-    default:
-      return state;
+    case 'SET_TRANSACTIONS': return { ...state, transactions: action.payload };
+    case 'ADD_ENTRY':        return { ...state, transactions: [action.payload, ...state.transactions] };
+    case 'REMOVE_ENTRY':     return { ...state, transactions: state.transactions.filter(tx => tx.id !== action.payload) };
+    case 'SET_BUDGET':       return { ...state, budget: action.payload };
+    default:                 return state;
   }
 }
 
 export const TransactionProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(TransactionReducer, initialState);
+const saved = JSON.parse(localStorage.getItem('spendle_transactions') || '[]');
+const [state, dispatch] = useReducer(TransactionReducer, { transactions: saved, budget: 0 });
 
   useEffect(() => {
     const saved = localStorage.getItem('spendle_transactions');
@@ -45,13 +38,7 @@ export const TransactionProvider = ({ children }) => {
   const setBudget = val => dispatch({ type: 'SET_BUDGET', payload: val });
 
   return (
-    <TransactionContext.Provider value={{
-      transactions: state.transactions,
-      budget: state.budget,
-      addEntry,
-      removeEntry,
-      setBudget,
-    }}>
+    <TransactionContext.Provider value={{ transactions: state.transactions, budget: state.budget, addEntry, removeEntry, setBudget }}>
       {children}
     </TransactionContext.Provider>
   );

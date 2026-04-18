@@ -1,12 +1,12 @@
 import { useContext } from 'react';
-import { Navbar, Container, Nav, Button } from 'react-bootstrap';
+import { Navbar, Container, Nav } from 'react-bootstrap';
 import { ThemeContext } from '../context/ThemeContext';
 
 const AppNavbar = ({ onLoginClick, isLoggedIn, onLogout, userName }) => {
   const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
-    <Navbar expand="lg" className="spendle-nav shadow-sm py-2" bg={theme} data-bs-theme={theme}>
+    <Navbar expand="lg" className="spendle-nav py-2">
       <Container fluid="lg">
         <Navbar.Brand href="#" className="fw-bold spendle-brand">
           💰 Spendle
@@ -16,10 +16,10 @@ const AppNavbar = ({ onLoginClick, isLoggedIn, onLogout, userName }) => {
         <Navbar.Collapse id="nav-collapse">
           {isLoggedIn && (
             <Nav className="me-auto">
-              <Nav.Link href="#summary">Summary</Nav.Link>
-              <Nav.Link href="#chart">Analytics</Nav.Link>
-              <Nav.Link href="#add">Add</Nav.Link>
-              <Nav.Link href="#history">History</Nav.Link>
+              <Nav.Link href="#summary" className="spendle-nav-link">Summary</Nav.Link>
+              <Nav.Link href="#chart" className="spendle-nav-link">Analytics</Nav.Link>
+              <Nav.Link href="#add" className="spendle-nav-link">Add</Nav.Link>
+              <Nav.Link href="#history" className="spendle-nav-link">History</Nav.Link>
             </Nav>
           )}
 
@@ -27,23 +27,13 @@ const AppNavbar = ({ onLoginClick, isLoggedIn, onLogout, userName }) => {
             {isLoggedIn && userName && (
               <span className="nav-username d-none d-md-inline">👤 {userName}</span>
             )}
-
-            <Button
-              variant={theme === 'dark' ? 'outline-light' : 'outline-dark'}
-              size="md"
-              onClick={toggleTheme}
-            >
+            <button className="nav-icon-btn" onClick={toggleTheme}>
               {theme === 'dark' ? '☀️ Light' : '🌙 Dark'}
-            </Button>
-
+            </button>
             {!isLoggedIn ? (
-              <Button variant="outline-primary" size="md" onClick={onLoginClick}>
-                Login
-              </Button>
+              <button className="nav-icon-btn" onClick={onLoginClick}>Login</button>
             ) : (
-              <Button variant="outline-danger" size="md" onClick={onLogout}>
-                Logout
-              </Button>
+              <button className="nav-icon-btn nav-icon-btn--danger" onClick={onLogout}>Logout</button>
             )}
           </div>
         </Navbar.Collapse>

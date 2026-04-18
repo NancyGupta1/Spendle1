@@ -60,21 +60,115 @@ const Dashboard = ({ user, onLogout }) => {
 const Landing = ({ onLoginClick }) => (
   <>
     <AppNavbar onLoginClick={onLoginClick} />
-    <div className="landing-screen">
-      <div className="landing-card">
-        <div className="landing-logo">💰 Spendle</div>
-        <h1 className="landing-title">Track every rupee.<br />Save smarter.</h1>
-        <p className="landing-sub">
-          Personal finance tracker with budget alerts, smart suggestions, and beautiful analytics.
-        </p>
-        <button className="landing-btn" onClick={onLoginClick}>Get Started →</button>
-        <div className="landing-features">
-          <span>📊 Analytics</span>
-          <span>🎯 Budget Alerts</span>
-          <span>💡 Smart Tips</span>
-          <span>⬇ CSV Export</span>
+
+    {/* ── HERO ── */}
+    <div className="landing-hero">
+      <div className="landing-orb landing-orb--1" />
+      <div className="landing-orb landing-orb--2" />
+
+      <div className="landing-badge">
+        <span className="landing-badge__dot" />
+        Personal finance, simplified
+      </div>
+
+      <h1 className="landing-title">
+        Track every <span className="landing-title__lime">rupee.</span><br />
+        Save <span className="landing-title__amber">smarter.</span>
+      </h1>
+
+      <p className="landing-sub">
+        Budget alerts, smart suggestions, and beautiful analytics —<br />
+        all on your device. No sign-up needed.
+      </p>
+
+      <div className="landing-cta-group">
+        <button className="landing-btn-primary" onClick={onLoginClick}>
+          Get Started →
+        </button>
+        <button className="landing-btn-secondary">See how it works</button>
+      </div>
+    </div>
+
+    {/* ── STATS BAR ── */}
+    <div className="landing-stats-bar">
+      {[
+        { num: '₹0',   label: 'Data cost · always free' },
+        { num: '100%', label: 'Data stays on device' },
+        { num: '5s',   label: 'To add a transaction' },
+        { num: '∞',    label: 'Categories & budgets' },
+      ].map(({ num, label }) => (
+        <div className="landing-stat" key={label}>
+          <div className="landing-stat__num">{num}</div>
+          <div className="landing-stat__label">{label}</div>
         </div>
-        <p className="landing-hint">Free · No sign-up required · Data stays on your device</p>
+      ))}
+    </div>
+
+    {/* ── FEATURE CARDS ── */}
+    <div className="landing-features-section">
+      <p className="landing-section-label">What's inside</p>
+      <h2 className="landing-section-title">
+        Everything you need,<br />nothing you don't.
+      </h2>
+
+      <div className="landing-cards-grid">
+
+        {/* Wide analytics card */}
+        <div className="landing-feat-card landing-feat-card--wide">
+          <div className="landing-feat-icon landing-feat-icon--lime">📊</div>
+          <div className="landing-feat-title">Beautiful Analytics</div>
+          <div className="landing-feat-desc">
+            Monthly breakdowns, category trends, and visual spending patterns that actually make sense.
+          </div>
+          <div className="landing-mini-chart">
+            {[30, 55, 40, 80, 65, 45, 70, 50, 90, 60].map((h, i) => (
+              <div
+                key={i}
+                className={`landing-mini-bar${h >= 80 ? ' landing-mini-bar--active' : ''}`}
+                style={{ height: `${h}%` }}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div className="landing-feat-card">
+          <div className="landing-feat-icon landing-feat-icon--amber">🎯</div>
+          <div className="landing-feat-title">Budget Alerts</div>
+          <div className="landing-feat-desc">Set monthly limits and get notified before you overspend.</div>
+        </div>
+
+        <div className="landing-feat-card">
+          <div className="landing-feat-icon landing-feat-icon--lime">💡</div>
+          <div className="landing-feat-title">Smart Tips</div>
+          <div className="landing-feat-desc">Personalized suggestions based on your actual spending habits.</div>
+        </div>
+
+        <div className="landing-feat-card">
+          <div className="landing-feat-icon landing-feat-icon--blue">⬇</div>
+          <div className="landing-feat-title">CSV Export</div>
+          <div className="landing-feat-desc">Export all your transactions anytime. Your data, your format.</div>
+        </div>
+
+        <div className="landing-feat-card">
+          <div className="landing-feat-icon landing-feat-icon--amber">🔄</div>
+          <div className="landing-feat-title">Recurring Expenses</div>
+          <div className="landing-feat-desc">Templates for rent, subscriptions, and bills. Log them in one tap.</div>
+        </div>
+
+      </div>
+    </div>
+
+    {/* ── BOTTOM CTA ── */}
+    <div className="landing-bottom-cta">
+      <div className="landing-bottom-cta__text">
+        <h2>Start tracking<br />in seconds.</h2>
+        <p>No account. No subscription. No excuses.</p>
+      </div>
+      <div className="landing-bottom-cta__right">
+        <button className="landing-btn-primary landing-btn-primary--lg" onClick={onLoginClick}>
+          Get Started →
+        </button>
+        <span className="landing-bottom-hint">Free · Works offline · Data never leaves you</span>
       </div>
     </div>
   </>
@@ -102,30 +196,30 @@ const App = () => {
     setShowLogin(false);
   };
 
-if (showLogin) {
+  if (showLogin) {
+    return (
+      <>
+        <CustomCursor />
+        <Loginpage onLogin={handleLogin} />
+      </>
+    );
+  }
+
+  if (user) {
+    return (
+      <>
+        <CustomCursor />
+        <Dashboard user={user} onLogout={handleLogout} />
+      </>
+    );
+  }
+
   return (
     <>
       <CustomCursor />
-      <Loginpage onLogin={handleLogin} />
+      <Landing onLoginClick={() => setShowLogin(true)} />
     </>
   );
-}
-
-if (user) {
-  return (
-    <>
-      <CustomCursor />
-      <Dashboard user={user} onLogout={handleLogout} />
-    </>
-  );
-}
-
-return (
-  <>
-    <CustomCursor />
-    <Landing onLoginClick={() => setShowLogin(true)} />
-  </>
-);
 };
 
 export default App;

@@ -1,31 +1,312 @@
-$primary: #4caf50;
-$success: #009688;
-$font-family-sans-serif: 'Poppins', sans-serif;
+// ─── Google Fonts ───────────────────────────────────────────────
+@import url('https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap');
+
+// ─── Bootstrap overrides (must come BEFORE the import) ──────────
+$primary:                 #C8F135;   // lime — main CTA colour
+$secondary:               #FFD166;   // amber accent
+$success:                 #22c55e;
+$danger:                  #ef4444;
+$warning:                 #f59e0b;
+$info:                    #64a0ff;
+
+// Typography
+$font-family-sans-serif:  'DM Sans', sans-serif;
+$font-family-base:        $font-family-sans-serif;
+$headings-font-family:    'Clash Display', sans-serif;
+$headings-font-weight:    700;
+$headings-letter-spacing: -0.04em;
+
+// Body
+$body-bg:                 #0E0F0A;
+$body-color:              #F5F4EE;
+
+// Border radius
+$border-radius:           12px;
+$border-radius-lg:        16px;
+$border-radius-sm:        8px;
+$border-radius-pill:      100px;
+
+// Cards
+$card-bg:                 #1A1B14;
+$card-border-color:       rgba(255, 255, 255, 0.08);
+$card-border-radius:      20px;
+$card-spacer-x:           1.75rem;
+$card-spacer-y:           1.5rem;
+$card-box-shadow:         none;
+
+// Inputs
+$input-bg:                #222318;
+$input-border-color:      rgba(255, 255, 255, 0.08);
+$input-color:             #F5F4EE;
+$input-placeholder-color: #3A3B30;
+$input-focus-border-color:#C8F135;
+$input-focus-box-shadow:  0 0 0 3px rgba(200, 241, 53, 0.08);
+$input-border-radius:     12px;
+$input-padding-x:         1rem;
+$input-padding-y:         0.75rem;
+
+// Navbar
+$navbar-dark-color:             rgba(245, 244, 238, 0.75);
+$navbar-dark-hover-color:       #F5F4EE;
+$navbar-dark-active-color:      #C8F135;
+$navbar-padding-y:              1rem;
+
+// Buttons
+$btn-border-radius:       12px;
+$btn-border-radius-lg:    14px;
+$btn-padding-x:           1.75rem;
+$btn-padding-y:           0.75rem;
+$btn-font-weight:         600;
+$btn-font-family:         'Clash Display', sans-serif;
+
+// Tables
+$table-color:             #F5F4EE;
+$table-bg:                transparent;
+$table-border-color:      rgba(255, 255, 255, 0.07);
+$table-striped-bg:        rgba(255, 255, 255, 0.03);
+$table-hover-bg:          rgba(200, 241, 53, 0.05);
+
+// List group
+$list-group-bg:           #1A1B14;
+$list-group-border-color: rgba(255, 255, 255, 0.08);
+$list-group-color:        #F5F4EE;
+$list-group-hover-bg:     #222318;
+$list-group-active-bg:    #C8F135;
+$list-group-active-color: #0E0F0A;
+$list-group-action-color: #7A7B6F;
+
+// Badges
+$badge-border-radius:     100px;
+$badge-padding-x:         0.75em;
+$badge-padding-y:         0.35em;
+$badge-font-weight:       600;
+
+// Modals
+$modal-content-bg:             #1A1B14;
+$modal-content-border-color:   rgba(255, 255, 255, 0.08);
+$modal-content-border-radius:  20px;
+$modal-backdrop-opacity:       0.7;
+$modal-header-border-color:    rgba(255, 255, 255, 0.07);
+$modal-footer-border-color:    rgba(255, 255, 255, 0.07);
+
+// Dropdowns
+$dropdown-bg:              #1A1B14;
+$dropdown-border-color:    rgba(255, 255, 255, 0.08);
+$dropdown-link-color:      #F5F4EE;
+$dropdown-link-hover-bg:   #222318;
+$dropdown-link-hover-color:#C8F135;
+$dropdown-link-active-bg:  #C8F135;
+$dropdown-link-active-color:#0E0F0A;
+$dropdown-border-radius:   16px;
+$dropdown-padding-y:       0.5rem;
+
+// Toasts / Alerts
+$alert-border-radius:     12px;
+$alert-padding-x:         1rem;
+$alert-padding-y:         0.75rem;
+
+// ─── Bootstrap import ───────────────────────────────────────────
 @import 'bootstrap/scss/bootstrap';
+
+// ─── Dark theme block (data-theme="dark") ───────────────────────
+// The defaults above already target dark; this block keeps
+// compatibility with the existing [data-theme] toggle pattern.
 [data-theme='dark'] {
   body {
-    background-color: #1a1a1a;
-    color: #eaeaea;
+    background-color: #0E0F0A;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    color: #F5F4EE;
   }
 
   .card {
-    background-color: #2a2a2a;
-    color: white;
+    background-color: #1A1B14;
+    border-color: rgba(255,255,255,0.08);
+    color: #F5F4EE;
   }
 
-  .navbar,
+  .navbar {
+    background-color: #0E0F0A !important;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+
   .btn-light {
-    background-color: #2a2a2a !important;
-    color: #fff !important;
+    background-color: #222318 !important;
+    border-color: rgba(255,255,255,0.1) !important;
+    color: #F5F4EE !important;
+
+    &:hover {
+      background-color: #2c2d1f !important;
+      border-color: rgba(200,241,53,0.25) !important;
+      color: #C8F135 !important;
+    }
   }
 
   .btn-outline-danger {
-    border-color: #e53e3e;
-    color: #e53e3e;
+    border-color: #ef4444;
+    color: #ef4444;
+
+    &:hover {
+      background-color: rgba(239,68,68,0.1);
+    }
   }
 
   .list-group-item {
-    background-color: #333;
-    color: white;
+    background-color: #1A1B14;
+    border-color: rgba(255,255,255,0.07);
+    color: #F5F4EE;
+
+    &:hover {
+      background-color: #222318;
+    }
   }
+
+  .form-control,
+  .form-select {
+    background-color: #222318;
+    border-color: rgba(255,255,255,0.08);
+    color: #F5F4EE;
+
+    &:focus {
+      background-color: #222318;
+      border-color: #C8F135;
+      box-shadow: 0 0 0 3px rgba(200,241,53,0.08);
+      color: #F5F4EE;
+    }
+
+    &::placeholder { color: #3A3B30; }
+    option         { background: #1A1B14; }
+  }
+
+  .table {
+    color: #F5F4EE;
+    border-color: rgba(255,255,255,0.07);
+
+    thead th {
+      color: #7A7B6F;
+      border-color: rgba(255,255,255,0.07);
+    }
+
+    tbody tr:hover td {
+      background-color: rgba(200,241,53,0.04);
+    }
+  }
+
+  .modal-content {
+    background: #1A1B14;
+    border-color: rgba(255,255,255,0.08);
+  }
+
+  .modal-header,
+  .modal-footer {
+    border-color: rgba(255,255,255,0.07);
+  }
+
+  .dropdown-menu {
+    background: #1A1B14;
+    border-color: rgba(255,255,255,0.08);
+  }
+}
+
+// ─── Light theme block ───────────────────────────────────────────
+[data-theme='light'] {
+  body {
+    background-color: #F5F7F0;
+    background-image:
+      linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    color: #1A1B14;
+  }
+
+  .card {
+    background-color: #ffffff;
+    border-color: rgba(0,0,0,0.07);
+    color: #1A1B14;
+  }
+
+  .navbar {
+    background-color: #ffffff !important;
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+  }
+
+  .btn-primary {
+    color: #0E0F0A;
+  }
+
+  .list-group-item {
+    background-color: #ffffff;
+    border-color: rgba(0,0,0,0.07);
+    color: #1A1B14;
+  }
+
+  .form-control,
+  .form-select {
+    background-color: #f3f4ec;
+    border-color: rgba(0,0,0,0.1);
+    color: #1A1B14;
+
+    &:focus {
+      background-color: #f3f4ec;
+      border-color: #7a9a10;
+      box-shadow: 0 0 0 3px rgba(120,160,10,0.1);
+      color: #1A1B14;
+    }
+  }
+}
+
+// ─── Global utility overrides ────────────────────────────────────
+
+// Primary button always has dark text (lime bg)
+.btn-primary {
+  color: #0E0F0A !important;
+  font-family: 'Clash Display', sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+
+  &:hover {
+    background-color: #d6f84c;
+    border-color: #d6f84c;
+    box-shadow: 0 8px 28px rgba(200,241,53,0.25);
+    transform: translateY(-1px);
+    color: #0E0F0A !important;
+  }
+
+  &:active { transform: translateY(0); }
+}
+
+// Outline primary adapts to lime
+.btn-outline-primary {
+  color: #C8F135;
+  border-color: #C8F135;
+
+  &:hover {
+    background-color: #C8F135;
+    color: #0E0F0A;
+  }
+}
+
+// Scrollbar
+::-webkit-scrollbar       { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(200,241,53,0.2); }
+
+// Selection colour
+::selection {
+  background: rgba(200, 241, 53, 0.25);
+  color: #F5F4EE;
+}
+
+// Focus ring
+:focus-visible {
+  outline: 2px solid #C8F135;
+  outline-offset: 3px;
+}
+
+// Smooth transitions on theme switch
+*, *::before, *::after {
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.15s ease;
 }

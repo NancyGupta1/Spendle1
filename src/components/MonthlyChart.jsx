@@ -9,9 +9,14 @@ import { useTransactions } from '../hooks/useTransactions';
 Chart.register(CategoryScale, LinearScale, BarElement, ArcElement, Title, Tooltip, Legend);
 
 const CAT_COLORS = {
-  General: '#7c5cfc', Groceries: '#22d3ee', Travel: '#d63af9',
-  Bills: '#f87171',   Entertainment: '#fbbf24', Food: '#f472b6',
-  Health: '#34d399',  Shopping: '#a78bfa',
+  General:       '#C8F135',
+  Groceries:     '#FFD166',
+  Travel:        '#6ee7b7',
+  Bills:         '#f87171',
+  Entertainment: '#fbbf24',
+  Food:          '#86efac',
+  Health:        '#34d399',
+  Shopping:      '#a3e635',
 };
 
 const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -35,12 +40,11 @@ const MonthlyChart = () => {
   const { transactions, monthlyData, categoryTotals } = useTransactions();
   const [activeTab, setActiveTab] = useState('bar');
 
-  // ── ADDED: read theme on each render ──
-  const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
-  const axisColor  = isDark ? '#6666aa' : '#9b98b0';
-  const legendColor = isDark ? '#8888bb' : '#6b7280';
-  const pieEdge    = isDark ? '#151530' : '#f0eeff';
-  const gridColor  = isDark ? 'rgba(120,100,200,0.12)' : 'rgba(124,92,252,0.08)';
+  const isDark      = document.documentElement.getAttribute('data-theme') !== 'light';
+  const axisColor   = isDark ? '#7A7B6F' : '#8a8e74';
+  const legendColor = isDark ? '#7A7B6F' : '#6b6e58';
+  const pieEdge     = isDark ? '#161711' : '#f3f4ec';
+  const gridColor   = isDark ? 'rgba(200,241,53,0.06)' : 'rgba(90,122,8,0.07)';
 
   const barData = useMemo(() => ({
     labels: MONTHS,
@@ -48,8 +52,8 @@ const MonthlyChart = () => {
       {
         label: 'Income',
         data: monthlyData('income'),
-        backgroundColor: '#7c5cfc',
-        _gradientColors: ['#7c5cfc', '#5c3cdc'],
+        backgroundColor: '#C8F135',
+        _gradientColors: ['#C8F135', '#9ab82a'],
         borderRadius: 8,
         borderSkipped: false,
         barPercentage: 0.45,
@@ -57,8 +61,8 @@ const MonthlyChart = () => {
       {
         label: 'Expense',
         data: monthlyData('expense'),
-        backgroundColor: '#d63af9',
-        _gradientColors: ['#d63af9', '#a020c0'],
+        backgroundColor: '#FFD166',
+        _gradientColors: ['#FFD166', '#d4a832'],
         borderRadius: 8,
         borderSkipped: false,
         barPercentage: 0.45,
@@ -66,13 +70,17 @@ const MonthlyChart = () => {
     ],
   }), [transactions]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // ── CHANGED: axisColor + gridColor replace hardcoded values ──
   const barOptions = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
       legend: { display: false },
       tooltip: {
+        backgroundColor: isDark ? '#1A1B14' : '#ffffff',
+        borderColor: isDark ? 'rgba(200,241,53,0.18)' : 'rgba(90,122,8,0.15)',
+        borderWidth: 1,
+        titleColor: isDark ? '#F5F4EE' : '#1A1B14',
+        bodyColor: isDark ? '#7A7B6F' : '#6b6e58',
         callbacks: { label: ctx => ' ₹' + ctx.parsed.y.toLocaleString('en-IN') },
       },
     },
@@ -94,14 +102,13 @@ const MonthlyChart = () => {
     },
   };
 
-  // ── CHANGED: pieEdge replaces hardcoded '#151530' ──
   const pieData = useMemo(() => {
     const cats = Object.keys(categoryTotals);
     return {
       labels: cats,
       datasets: [{
         data: cats.map(c => Math.round(categoryTotals[c])),
-        backgroundColor: cats.map(c => CAT_COLORS[c] || '#7c5cfc'),
+        backgroundColor: cats.map(c => CAT_COLORS[c] || '#C8F135'),
         borderWidth: 2,
         borderColor: pieEdge,
         hoverOffset: 8,
@@ -109,7 +116,6 @@ const MonthlyChart = () => {
     };
   }, [transactions, pieEdge]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // ── CHANGED: legendColor replaces hardcoded '#8888bb' ──
   const pieOptions = {
     responsive: true,
     maintainAspectRatio: false,
@@ -130,6 +136,11 @@ const MonthlyChart = () => {
         },
       },
       tooltip: {
+        backgroundColor: isDark ? '#1A1B14' : '#ffffff',
+        borderColor: isDark ? 'rgba(200,241,53,0.18)' : 'rgba(90,122,8,0.15)',
+        borderWidth: 1,
+        titleColor: isDark ? '#F5F4EE' : '#1A1B14',
+        bodyColor: isDark ? '#7A7B6F' : '#6b6e58',
         callbacks: { label: ctx => ' ₹' + ctx.parsed.toLocaleString('en-IN') },
       },
     },
@@ -154,10 +165,10 @@ const MonthlyChart = () => {
       {activeTab === 'bar' && (
         <div className="chart-legend">
           <span className="chart-legend__item">
-            <span className="chart-legend__dot" style={{ background: '#7c5cfc' }} />Income
+            <span className="chart-legend__dot" style={{ background: '#C8F135' }} />Income
           </span>
           <span className="chart-legend__item">
-            <span className="chart-legend__dot" style={{ background: '#d63af9' }} />Expense
+            <span className="chart-legend__dot" style={{ background: '#FFD166' }} />Expense
           </span>
         </div>
       )}

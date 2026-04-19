@@ -2,8 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap');
 
 // ─── Bootstrap overrides (must come BEFORE the import) ──────────
-$primary:                 #C8F135;   // lime — main CTA colour
-$secondary:               #FFD166;   // amber accent
+$primary:                 #C8F135;
+$secondary:               #FFD166;
 $success:                 #22c55e;
 $danger:                  #ef4444;
 $warning:                 #f59e0b;
@@ -108,9 +108,7 @@ $alert-padding-y:         0.75rem;
 // ─── Bootstrap import ───────────────────────────────────────────
 @import 'bootstrap/scss/bootstrap';
 
-// ─── Dark theme block (data-theme="dark") ───────────────────────
-// The defaults above already target dark; this block keeps
-// compatibility with the existing [data-theme] toggle pattern.
+// ─── Dark theme block ───────────────────────────────────────────
 [data-theme='dark'] {
   body {
     background-color: #0E0F0A;
@@ -128,7 +126,7 @@ $alert-padding-y:         0.75rem;
   }
 
   .navbar {
-    background-color: #0E0F0A !important;
+    background-color: #1A1B14 !important;
     border-bottom: 1px solid rgba(255,255,255,0.07);
   }
 
@@ -158,9 +156,7 @@ $alert-padding-y:         0.75rem;
     border-color: rgba(255,255,255,0.07);
     color: #F5F4EE;
 
-    &:hover {
-      background-color: #222318;
-    }
+    &:hover { background-color: #222318; }
   }
 
   .form-control,
@@ -210,49 +206,95 @@ $alert-padding-y:         0.75rem;
   }
 }
 
-// ─── Light theme block ───────────────────────────────────────────
+// ─── Light theme block — olive ───────────────────────────────────
 [data-theme='light'] {
   body {
     background-color: #F5F7F0;
     background-image:
-      linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
+      linear-gradient(rgba(0,0,0,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,0,0,0.035) 1px, transparent 1px);
     background-size: 40px 40px;
     color: #1A1B14;
   }
 
   .card {
     background-color: #ffffff;
-    border-color: rgba(0,0,0,0.07);
+    border-color: rgba(30,35,10,0.08);
     color: #1A1B14;
   }
 
   .navbar {
-    background-color: #ffffff !important;
-    border-bottom: 1px solid rgba(0,0,0,0.07);
+    background-color: rgba(255,255,255,0.95) !important;
+    border-bottom: 1px solid rgba(30,35,10,0.08);
   }
 
   .btn-primary {
     color: #0E0F0A;
+    background-color: #C8F135;
+    border-color: #C8F135;
   }
 
   .list-group-item {
     background-color: #ffffff;
-    border-color: rgba(0,0,0,0.07);
+    border-color: rgba(30,35,10,0.08);
     color: #1A1B14;
+
+    &:hover { background-color: #f3f4ec; }
   }
 
   .form-control,
   .form-select {
-    background-color: #f3f4ec;
-    border-color: rgba(0,0,0,0.1);
+    background-color: #f0f1e8;
+    border-color: rgba(30,35,10,0.10);
     color: #1A1B14;
 
     &:focus {
-      background-color: #f3f4ec;
+      background-color: #f0f1e8;
       border-color: #7a9a10;
-      box-shadow: 0 0 0 3px rgba(120,160,10,0.1);
+      box-shadow: 0 0 0 3px rgba(90,122,8,0.10);
       color: #1A1B14;
+    }
+
+    &::placeholder { color: #8a8e74; }
+    option         { background: #ffffff; }
+  }
+
+  .table {
+    color: #1A1B14;
+    border-color: rgba(30,35,10,0.08);
+
+    thead th {
+      color: #6b6e58;
+      border-color: rgba(30,35,10,0.08);
+    }
+
+    tbody tr:hover td {
+      background-color: rgba(90,122,8,0.04);
+    }
+  }
+
+  .modal-content {
+    background: #ffffff;
+    border-color: rgba(30,35,10,0.08);
+    color: #1A1B14;
+  }
+
+  .modal-header,
+  .modal-footer {
+    border-color: rgba(30,35,10,0.07);
+  }
+
+  .dropdown-menu {
+    background: #ffffff;
+    border-color: rgba(30,35,10,0.08);
+
+    .dropdown-item {
+      color: #1A1B14;
+
+      &:hover {
+        background-color: #f3f4ec;
+        color: #5a7a08;
+      }
     }
   }
 }
@@ -291,8 +333,8 @@ $alert-padding-y:         0.75rem;
 // Scrollbar
 ::-webkit-scrollbar       { width: 5px; height: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 99px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(200,241,53,0.2); }
+::-webkit-scrollbar-thumb { background: rgba(200,241,53,0.15); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(200,241,53,0.28); }
 
 // Selection colour
 ::selection {
